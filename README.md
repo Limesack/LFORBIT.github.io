@@ -21,3 +21,26 @@ The system functions by passing x and y coordinates of the planets from JavaScri
 (/assets/images/Code_Example.png)
 Figure 2: Example of normalization of “kPlanet_6”
 
+
+## Synthesis & Processing
+All the sounds are generated using noise (pinker, dust2), granular synthesis (partikkel), subtractive synthesis (oscili), and Karplus-Strong synthesis (pluck) in Csound. Several of the instruments also contains a degree of randomness, such as amplitude, spreading sounds around the stereo image, and pitch.
+
+The processing of the sounds is done using numerous techniques:
+-	Granular manipulation
+o	Grain length
+o	Grain rate
+o	Grain shape
+o	Random muting of grains
+
+-	Spectral manipulation 
+o	Shimmer delay (frequency and amplitude doubling)
+o	Morphing between two sounds
+o	Random freezing of interpolated signal
+o	Spectral smoothing
+
+-	Filter
+o	Different cutoffs
+
+-	Reverb
+o	Different room sizes
+
