@@ -657,35 +657,14 @@
             kAmplitude = 0.45 // amplitude
             kPlanet_3_Y chnget "Planet_3_Y"
             kFrequency = (kPlanet_3_Y+40)/10 // in Hz
-
-        //SINE OSCILATORS
-            aSine1 oscili kAmplitude, kFrequency
-
-            aSine2 oscili kAmplitude, kFrequency+koffset
-
             imode = 0 // 0: sawtooth | 2: square/PWM | 4: sawtooth/triangle/ramp
             kpw = 0 // the pulse width of the square wave (imode waveform=2) or the ramp characteristics of the triangle wave (imode waveform=4).
 
             aVCO1 vco2 kAmplitude, kFrequency, imode, kpw
             aVCO2 vco2 kAmplitude, kFrequency+koffset, imode, kpw
 
-        // Voice selector
-              kvoice1 = 1
-              kvoice2 = 1
-              if kvoice1 = 0 then
-                aOSC1 = aSine1
-                elseif kvoice1 = 1 then
-                  aOSC1 = aVCO1
-                endif
-
-              if kvoice2 = 0 then
-                aOSC2 = aSine2
-                elseif kvoice2 = 1 then
-                  aOSC2 = aVCO2
-                endif
-
         //SUM FROM OSCILATORS
-            aOut = (aOSC1+aOSC2)*0.5
+            aOut = (aVCO1+aVCO2)*0.5
 
         // FILTER *** HENTE FRA HTLM
             kcf = 120 // filter cutoff frequency
@@ -779,7 +758,7 @@
             aHFnoiseR chnget "HFnoiseR"
 
         // MAIN OUTPUT
-        // Summing all the individual channels (gained in their respective instruments) and scales the total value 
+        // Summing all the individual channels (gained in their respective instruments) and scales the total value
             kGlobal_Out_skal = 0.5
             outs (aPulse_Out_L+aGIT_L+aBass+aGrain_Out_L+aLFnoise+aHFnoiseL+aSpectral_Out_L)*kGlobal_Out_skal,\
                  (aPulse_Out_R+aGIT_R+aBass+aGrain_Out_R+aLFnoise+aHFnoiseR+aSpectral_Out_R)*kGlobal_Out_skal
@@ -806,7 +785,8 @@
        planets.forEach(planet => {
          planet.update();
          // Importing planet parametres from Canvas and sends them to CSound instance
-         csound.setControlChannel("Planet_0_X", planets[0].x);
+         if(typeof csound != "undefined"){
+          csound.setControlChannel("Planet_0_X", planets[0].x);
          csound.setControlChannel("Planet_0_Y", planets[0].y);
          csound.setControlChannel("Planet_0_Radian", planets[0].radian);
          csound.setControlChannel("Planet_1_X", planets[1].x);
@@ -833,6 +813,7 @@
          csound.setControlChannel("Planet_8_X", planets[8].x);
          csound.setControlChannel("Planet_8_Y", planets[8].y);
          csound.setControlChannel("Planet_8_Radian", planets[8].radian);
+         }
        });
      }
      planetToDrag = null
