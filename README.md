@@ -31,6 +31,7 @@ During week 2 we had to redesign our approach to the user interface, and how we 
 ## GUI
 We decided to use a premade JavaScript for creating a baseline [graphical interface](https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123) for our project given our inexperience with both HTML and JavaScript. Initially it consisted of 9 orbiting planets with set starting positions, velocity and no mouse interactivity. Our goal then became to add interactivity to the planets, primarily in the form of changing the velocity based on mouse movement.
 
+### Altering the code
 Using this JavaScript code, we were able to change the initial positions of the different planets independently of each other. This would allow the user to start from a new starting point each time time the program is loaded.
 
 ```JavaScript
@@ -43,9 +44,76 @@ And by using by altering the second parameter in the `getPlanetForOptions` funct
 planets.push(getPlanetForOptions(5, getRandomInt(5, 8), 65, 'gray')); // mercury
 ```
 
+In order to retrieve the data we wanted from the GUI (i.e. X and Y coordinates) we had to develop an `Animate` function where we collected data from the animation each frame and sent it to CSound. This is the function we developed in order to do this
 
- The reason behind using a premade graphical interface was so we could keep our main focus on the audio programming part of the project. The interface is minimalistic in the sense that each planet does not contain any parameter explanations, which encourages the user to explore for the sake of fun and curiosity.
+```JavaScript
+function animate() {
+  requestAnimationFrame(animate);
+  c.clearRect(0, 0, canvas.width, canvas.height);
+  c.fillStyle = 'rgb(0, 0, 0)';
+  c.fillRect(0, 0, canvas.width, canvas.height);
 
+  planets.forEach(planet => {
+    planet.update();
+    if(typeof csound != "undefined"){
+    csound.setControlChannel("Planet_0_X", planets[0].x);
+    csound.setControlChannel("Planet_0_Y", planets[0].y);
+    csound.setControlChannel("Planet_0_Radian", planets[0].radian);
+    csound.setControlChannel("Planet_1_X", planets[1].x);
+    csound.setControlChannel("Planet_1_Y", planets[1].y);
+    csound.setControlChannel("Planet_1_Radian", planets[1].radian);
+    etc...
+    }
+  });
+}
+```
+
+This collects and sends the data we believed would be most useful each frame from of the animation to CSound. In its current form, only the X and Y values are used, as the radian value didn't behave in a way that proved useful for mapping our current available parameters.
+
+### Adding Mouse interactivity
+In order to add interactivity to the GUI we had to create an additional function inside the animate function. Here we defined the drag start and end points, in addition to the planet to drag. Then we collected the mouse position based on its coordinates and made the mouse pointer able to alter the velocity of the planets. Whilst a bit finnicky to use, the program is fully capable of altering the velocity of the individual planets; and even stopping them in their orbit completely.
+
+```JavaScript
+planetToDrag = null
+       dragStart = [0,0]
+       dragEnd = [0,0]
+       dragging = false
+
+       function getCursorPosition(canvas, event) {
+      const rect = canvas.getBoundingClientRect()
+      const x = event.clientX - rect.left
+      const y = event.clientY - rect.top
+      return [x,y]
+
+   }
+   canvas.addEventListener('mousedown', function(e) {
+       dragStart = getCursorPosition(canvas, e)
+       dragging = true;
+        mouseRadius =  Math.sqrt((dragStart[0]-canvas.width / 2)**2+(dragStart[1]-canvas.height / 2)**2)
+
+        smallesRadiusDiff = 99999
+        planets.forEach(planet => {
+          if (Math.abs(planet.orbitRadius-mouseRadius)<smallesRadiusDiff){
+            planetToDrag = planet
+            smallesRadiusDiff = Math.abs(planet.orbitRadius-mouseRadius)
+          }
+        })
+
+   })
+   canvas.addEventListener('mouseup', function(e) {
+       dragging = false;
+   })
+   canvas.addEventListener('mousemove', function(e) {
+     if (dragging){
+       dragEnd = getCursorPosition(canvas, e)
+       dist = (dragEnd[0]-dragStart[0])/10000
+        planetToDrag.velocity = Math.max(planetToDrag.velocity + dist, 0.0001)
+        dragStart = dragEnd;
+     }
+   })
+```
+
+By using a pre-existing graphical interface we could keep our main focus on the audio programming part of the project. By giving minimal information to the user, we hoped that it would further encourage exploration of the different planets and how they work together to alter some of the same parameters.
 
 ![GUi](/assets/images/Orbit.gif)
 
