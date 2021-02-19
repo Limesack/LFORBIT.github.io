@@ -39,7 +39,7 @@ The processing of the sounds is done using numerous techniques:
   - Spectral smoothing
 
 -	Filter
-  - Different cutoffs
+- - Different cutoffs
 
 -	Reverb
   - Different room sizes
