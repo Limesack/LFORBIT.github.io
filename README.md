@@ -153,7 +153,7 @@ Figure 3: Example of planet value scaled for use in CSound Instrument
 
 
 ## Synthesis & Processing
-All the sounds are generated using noise ([pinker](https://csound.com/docs/manual/pinker.html), [dust2](https://csound.com/docs/manual/dust2.html)), granular synthesis ([partikkel](https://csound.com/docs/manual/partikkel.html)), subtractive synthesis ([oscili](https://csound.com/docs/manual/oscili.html)), and Karplus-Strong synthesis ([pluck](https://csound.com/docs/manual/pluck.html)) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other.
+All the sounds are generated using noise ( [pinker](https://csound.com/docs/manual/pinker.html) ,  [dust2](https://csound.com/docs/manual/dust2.html) ), granular synthesis ( [partikkel](https://csound.com/docs/manual/partikkel.html) ), subtractive synthesis ( [oscili](https://csound.com/docs/manual/oscili.html) ), and Karplus-Strong synthesis ( [pluck](https://csound.com/docs/manual/pluck.html) ) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other.
 
 
 The sounds created from noise is a low frequent rumbling that creates a certain ambience in the soundscape. The granular synthesis is a short repeating sine tone that varies in pitch, amplitude, and length between each tone. The subtractive synthesis is a slowly decaying bass sawtooth tone that constantly changes pitch. The Karplus-Strong synthesis consists of two instruments, one replicating a guitar string, and the other a drum, where both have a certain degree of randomness that decides their amplitude, panning and pitch.
