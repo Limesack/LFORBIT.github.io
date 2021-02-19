@@ -27,20 +27,20 @@ All the sounds are generated using noise (pinker, dust2), granular synthesis (pa
 
 The processing of the sounds is done using numerous techniques:
 -	Granular manipulation
-o	Grain length
-o	Grain rate
-o	Grain shape
-o	Random muting of grains
+Grain length
+Grain rate
+Grain shape
+Random muting of grains
 
 -	Spectral manipulation 
-o	Shimmer delay (frequency and amplitude doubling)
-o	Morphing between two sounds
-o	Random freezing of interpolated signal
-o	Spectral smoothing
+Shimmer delay (frequency and amplitude doubling)
+Morphing between two sounds
+Random freezing of interpolated signal
+Spectral smoothing
 
 -	Filter
-o	Different cutoffs
+Different cutoffs
 
 -	Reverb
-o	Different room sizes
+Different room sizes
 
