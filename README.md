@@ -141,7 +141,7 @@ kPlanet_6_X chnget "Planet_6_X"
 kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)
 ```
 
-Figure 2: Example of min-max normalization of Planet_6's X coordinates for use in CSound
+Figure 3: Example of min-max normalization of Planet_6's X coordinates for use in CSound
 
 
 ```CSound
@@ -149,7 +149,7 @@ kPlanet_3_Y chnget "Planet_3_Y"
 kFrequency = (kPlanet_3_Y+40)/10
 ```
 
-Figure 3: Example of planet value scaled for use in CSound Instrument
+Figure 4: Example of planet value scaled for use in CSound Instrument
 
 
 ## Synthesis & Processing
