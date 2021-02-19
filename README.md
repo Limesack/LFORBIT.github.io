@@ -11,7 +11,7 @@ Sebastian's primarily focused on implementing granular synthesis and spectral pr
 
 
 ### Goals
-Our goals for the project was to include CSound as a sound engine inside a external process. We chose HTLM due to the possibilities regard graphical user interfaces and accessibility. Sebastian's goal for the sound engine was to further explore Granular synthesis in conjunction spectral processing (i.e. morphing, pitching and freeing amplitude and frequency content in PVS streams), and Håkon wanted to explore the nature of generative music.
+Our goals for the project was to include CSound as a sound engine inside a external process. We chose HTML due to the possibilities regard graphical user interfaces and accessibility. Sebastian's goal for the sound engine was to further explore Granular synthesis in conjunction spectral processing (i.e. morphing, pitching and freeing amplitude and frequency content in PVS streams), and Håkon wanted to explore the nature of generative music.
 
 
 ## Timeline
@@ -31,20 +31,26 @@ During week 2 we had to redesign our approach to the user interface, and how we 
 ## GUI
 We decided to use a premade JavaScript for creating a baseline [graphical interface](https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123) for our project given our inexperience with both HTML and JavaScript. Initially it consisted of 9 orbiting planets with set starting positions, velocity and no mouse interactivity. Our goal then became to add interactivity to the planets, primarily in the form of changing the velocity based on mouse movement.
 
+
 ### Altering the code
 Using this JavaScript code, we were able to change the initial positions of the different planets independently of each other. This would allow the user to start from a new starting point each time time the program is loaded.
+
 
 ```JavaScript
 this.radian = Math.PI * 2 * Math.random();
 ```
 
+
 And by using by altering the second parameter in the `getPlanetForOptions` function we were also able to randomly set the starting velocity of the individual planets.
+
 
 ```JavaScript
 planets.push(getPlanetForOptions(5, getRandomInt(5, 8), 65, 'gray')); // mercury
 ```
 
+
 In order to retrieve the data we wanted from the GUI (i.e. X and Y coordinates) we had to develop an `Animate` function where we collected data from the animation each frame and sent it to CSound. This is the function we developed in order to do this
+
 
 ```JavaScript
 function animate() {
@@ -68,10 +74,13 @@ function animate() {
 }
 ```
 
+
 This collects and sends the data we believed would be most useful each frame from of the animation to CSound. In its current form, only the X and Y values are used, as the radian value didn't behave in a way that proved useful for mapping our current available parameters.
+
 
 ### Adding Mouse interactivity
 In order to add interactivity to the GUI we had to create an additional function inside the animate function. Here we defined the drag start and end points, in addition to the planet to drag. Then we collected the mouse position based on its coordinates and made the mouse pointer able to alter the velocity of the planets. Whilst a bit finnicky to use, the program is fully capable of altering the velocity of the individual planets; and even stopping them in their orbit completely.
+
 
 ```JavaScript
 planetToDrag = null
@@ -121,10 +130,10 @@ Figure 2: Graphical User Interface of LFOrbit
 
 
 ## System
-By combining JavaScript, HTML and WebAudio CSound we have created an interactive musical solar system called “LFOrbit”. The planets in the system orbit around a centre, and each planet is mapped to modulate different parameters in CSound. By clicking on a planet, the user can change the velocity of the planet’s movement, which in return changes the speed of the modulation.
+By combining JavaScript, HTML and WebAudio CSound we have created an interactive musical solar system we've named “LFOrbit”. The planets in the system orbit around a sun, and each planet is mapped to modulate different parameters in CSound. By dragging a planet the user can change the velocity plants orbit around the centre, which in return changes the speed of the modulation in CSound.
 
 
-The system functions by passing x and y coordinates of the planets from JavaScript into CSound and using them as k-rate variables there. This is done by passing data through channels from JavaScript into CSound and defining them as variables. The raw output from the coordinates themselves are not necessarily that useful for use in CSound opcodes, so we have normalized the data into reasonable values for the instruments to function correctly.
+The system functions by passing X and Y coordinates of the planets from JavaScript into CSound and using them as k-rate variables. The raw output from the coordinates themselves are not necessarily that useful for use in CSound opcodes, so we often normalized the data into reasonable values for the instruments to function correctly or scaled them accordingly.
 
 
 ```CSound
@@ -132,11 +141,23 @@ kPlanet_6_X chnget "Planet_6_X"
 kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)
 ```
 
-Figure 2: Example of normalization of “kPlanet_6”
+Figure 2: Example of min-max normalization of Planet_6's X coordinates for use in CSound
+
+
+```CSound
+kPlanet_3_Y chnget "Planet_3_Y"
+kFrequency = (kPlanet_3_Y+40)/10 
+```
+
+Figure 3: Example of planet value scaled for use in CSound Instrument
 
 
 ## Synthesis & Processing
-All the sounds are generated using noise (pinker, dust2), granular synthesis (partikkel), subtractive synthesis (oscili), and Karplus-Strong synthesis (pluck) in CSound. Several of the instruments also contains a degree of randomness, such as amplitude, spreading sounds around the stereo image, and pitch.
+All the sounds are generated using noise (pinker, dust2), granular synthesis (partikkel), subtractive synthesis (oscili), and Karplus-Strong synthesis (pluck) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other.
+
+
+The sounds created from noise is a low frequent rumbling that creates a certain ambience in the soundscape. The granular synthesis is a short repeating sine tone that varies in pitch, amplitude, and length between each tone. The subtractive synthesis is a slowly decaying bass sawtooth tone that constantly changes pitch. The Karplus-Strong synthesis consists of two instruments, one replicating a guitar string, and the other a drum, where both have a certain degree of randomness that decides their amplitude, panning and pitch.
+
 
 
 The processing of the sounds is done using numerous techniques:
