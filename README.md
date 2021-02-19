@@ -37,8 +37,10 @@ Using this JavaScript code, we were able to change the initial positions of the 
 this.radian = Math.PI * 2 * Math.random();
 ```
 
-```JavaScript
+And by using by altering the second parameter in the `getPlanetForOptions` function we were also able to randomly set the starting velocity of the individual planets.
 
+```JavaScript
+planets.push(getPlanetForOptions(5, getRandomInt(5, 8), 65, 'gray')); // mercury
 ```
 
 
