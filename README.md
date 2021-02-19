@@ -1,17 +1,27 @@
 # LFORBIT.github.io
 
+
 [LFORBIT - A visual representation of LFOs](https://limesack.github.io/LFORBIT.github.io/LFORBIT/src/index.html)
+
+
+
 
 ## Overview
 LFOrbit is designed to function as an ambient landscape generator, that emphasizes sonic transformation through both randomness and user-controlled modulation of instruments and effects. The project is created by implementing CSound into a webpage with a focus on how one can use HTML and JavaScript in combination with CSound to create visual, creative, and interactive audio experiences.
 
+
 The purpose of the project is to visualize how Low Frequency Oscillators (LFO) work, in a way that is accessible for any user independent on their background knowledge of music technology.
+
 
 Sebastian's primarily focused on implementing granular synthesis and spectral processing, while Håkon build the remaining instruments. Building the webpage and mapping the parameters to the GUI was a joint effort.
 
 
+
+
 ### Goals
 Our goals for the project was to include CSound as a sound engine inside a external process. We chose HTML due to the possibilities regard graphical user interfaces and accessibility. Sebastian's goal for the sound engine was to further explore Granular synthesis in conjunction spectral processing (i.e. morphing, pitching and freeing amplitude and frequency content in PVS streams), and Håkon wanted to explore the nature of generative music.
+
+
 
 
 ## Timeline
@@ -24,12 +34,18 @@ We started of the first week by considering what would be an interesting project
 Figure 1: User interface first draft
 
 
+
+
 ### Week 2:
 During week 2 we had to redesign our approach to the user interface, and how we would implement our sound system into it. After getting feedback on the project we came to realize that using a multitude of individual sliders to control a range of parameters might be too complex for a inexperienced user, and that the system would then function better as a synthesiser VST plugin. We decided to overhaul to the GUI, by implementing orbiting planets as interactable LFO controllers instead of normal sliders. While a bit abstract, it quickly became more interesting and visually pleasing, which in turn increases the target group of users.
 
 
+
+
 ## GUI
 We decided to use a premade JavaScript for creating a baseline [graphical interface](https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123) for our project given our inexperience with both HTML and JavaScript. Initially it consisted of 9 orbiting planets with set starting positions, velocity and no mouse interactivity. Our goal then became to add interactivity to the planets, primarily in the form of changing the velocity based on mouse movement.
+
+
 
 
 ### Altering the code
@@ -78,6 +94,8 @@ function animate() {
 This collects and sends the data we believed would be most useful each frame from of the animation to CSound. In its current form, only the X and Y values are used, as the radian value didn't behave in a way that proved useful for mapping our current available parameters.
 
 
+
+
 ### Adding Mouse interactivity
 In order to add interactivity to the GUI we had to create an additional function inside the animate function. Here we defined the drag start and end points, in addition to the planet to drag. Then we collected the mouse position based on its coordinates and made the mouse pointer able to alter the velocity of the planets. Whilst a bit finnicky to use, the program is fully capable of altering the velocity of the individual planets; and even stopping them in their orbit completely.
 
@@ -122,11 +140,15 @@ planetToDrag = null
    })
 ```
 
+
 By using a pre-existing graphical interface we could keep our main focus on the audio programming part of the project. By giving minimal information to the user, we hoped that it would further encourage exploration of the different planets and how they work together to alter some of the same parameters.
+
 
 ![GUi](/assets/images/Orbit.gif)
 
 Figure 2: Graphical User Interface of LFOrbit
+
+
 
 
 ## System
@@ -152,6 +174,8 @@ kFrequency = (kPlanet_3_Y+40)/10
 Figure 4: Example of planet value scaled for use in CSound Instrument
 
 
+
+
 ## Synthesis & Processing
 All the sounds are generated using noise ([pinker](https://csound.com/docs/manual/pinker.html), [dust2](https://csound.com/docs/manual/dust2.html)), granular synthesis ([partikkel](https://csound.com/docs/manual/partikkel.html)), subtractive synthesis ([oscili](https://csound.com/docs/manual/oscili.html)), and Karplus-Strong synthesis ([pluck](https://csound.com/docs/manual/pluck.html)) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other both in frequency and in timbre.
 
@@ -159,8 +183,9 @@ All the sounds are generated using noise ([pinker](https://csound.com/docs/manua
 The sounds created from noise is a low frequent rumbling that creates a certain ambience in the soundscape. The granular synthesis is a short repeating sine tone that varies in pitch, amplitude, and length between each tone. The subtractive synthesis is a slowly decaying bass sawtooth tone that constantly changes pitch. The Karplus-Strong synthesis consists of two instruments, one replicating a guitar string, and the other a drum, where both have a certain degree of randomness that decides their amplitude, panning and pitch.
 
 
-### Granular Synthesis
 
+
+### Granular Synthesis
 The processing of the sounds is done using numerous techniques:
 -	Granular manipulation
     - Grain length
@@ -168,17 +193,23 @@ The processing of the sounds is done using numerous techniques:
     - Grain shape
     - Random muting of grains
 
+
 -	Spectral manipulation
     - Shimmer delay (frequency and amplitude doubling)
     - Morphing between two sounds
     - Random freezing of interpolated signal
     - Spectral smoothing
 
+
 -	Filter
     - Different cutoffs
 
+
 -	Reverb
     - Different room sizes
+
+
+
 
 ## Parameters
 Several parts of the Csound code are mapped to each planet, making the results of the velocity change to each planet quite complex and hard to define through concise wording. However, the purpose behind this is a further improvement to the generative nature of the project, so that the soundscape is constantly changing. We had a focus from the start to allow the user to make drastic changes to the overall soundscape, but in the final version of our project, while the Csound parameter changes are clearly audible, they will probably not be as noticeable for a lot of users.
@@ -197,29 +228,51 @@ Not all planets are used for mapping, but the ones that are used, and how they a
     -	Normalized values from planet 2 and 7 x-coordinates modulates frequency and amplitude morphing between the grains and impulse synthesizer
     -	Planet 8 controls the spectral freeze frequency
 
+
 -	Noise percussion
     -	Planet 2 x-coordinates, normalized modulates the trigger frequency of the instrument
     -	Planet 3 x-coordinates controls the reverb decay length
 
+
 -	Bass synth
     -	Planet 3 x-coordinates modulates the pitch of the oscillator
+
 
 -	Noise filtering instrument
     -	Planet 4 x-coordinates modulates the HP and LP filters cutoff frequency
     -	Planet 8 x-coordinates modulates the amplitude of the dry signal sent into the reverb
 
+
+
+
 ## Reflection
 In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with Csound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
+
+
+
 
 ### Personal reflections Håkon:
 My personal experience with this project has been quite good, and I think we have made a good team. From the beginning, I wanted to explore ways to create generative music in CSound. I have tried different ways of randomizing parameters so that instruments have improved variation, while still somewhat maintaining its original timbre. I feel like I have accomplished this well, and I know this knowledge will be useful in future projects. A part of the project that I feel was confusing and difficult was the development of the webpage itself. While there were some useful coding examples, jumping into new programming languages was confusing and difficult for me. Overall, I think the project turned out great. I think the concept we made is unique, the soundscape is interesting, and controlling the planets function in the user-friendly way that we wanted to achieve.
 
 
-### Problems
+
+
+### Personal reclections Sebastian:
+afnsjnjsankjsafknjafsknjfsaknjnjkafskjnsakjfbksakbfsakbjasfkbj
+
+
+
+
+## Problems
 There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them runnable in a browser.
 
-### Further Improvements
+
+
+
+## Further Improvements
 There are several further improvements that can be made. Some of these are fixing audio glitches, better parameter mapping, improve planetary orbits (direction, shape, moving planets between orbits, collision), additional instruments and processing, and better mouse controls. Even though the project has its faults, we are quite happy with the result from these past two weeks.
+
+
 
 
 Please enjoy [LFORBIT - A visual representation of LFOs](https://limesack.github.io/LFORBIT.github.io/LFORBIT/src/index.html)
