@@ -7,7 +7,7 @@ The purpose of the project is to visualize how Low Frequency Oscillators (LFO) w
 Sebastians role was granular and spectral processing, while Håkon did the rest of the instruments. Both the team members did mapping of the parameters, and both worked on the web page. 
 
 ## GUI
-We decided to use a premade JavaScript project as our graphical interface (https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123). It consists of 9 orbiting planets that vary in color, with one static planet in the middle. The reason behind using a premade graphical interface was so we could keep our main focus on the audio programming part of the project. The interface is minimalistic in the sense that each planet does not contain any parameter explanations, which encourages the user to explore for the sake of fun and curiosity. 
+We decided to use a premade JavaScript project as our graphical interface [Medium] (https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123). It consists of 9 orbiting planets that vary in color, with one static planet in the middle. The reason behind using a premade graphical interface was so we could keep our main focus on the audio programming part of the project. The interface is minimalistic in the sense that each planet does not contain any parameter explanations, which encourages the user to explore for the sake of fun and curiosity. 
 
 (/assets/images/Orbit.png)
 Figure 1: Graphical User Interface of LFOrbit
