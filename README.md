@@ -14,6 +14,7 @@ Sebastian's primarily focused on implementing granular synthesis and spectral pr
 ### First week:
 We started of the first week by considering what would be an interesting project for this course, what was achievable within the timeframe, and if our skills could manage to do it. Sebastian suggested that we look at mynoise.net, a soundscape generator where the user can interact with parameters that change the amplitude of each sound layer. We took inspiration from this and started to build the faders in a HTML-file, with extra parameters so the user could manipulate the sound through processing methods.
 
+
 ![GUI first draft](/assets/images/SlidersHtml.png)
 
 Figure 1: User interface first draft
@@ -98,6 +99,8 @@ Not all planets are used for mapping, but the ones that are used, and how they a
 ## Reflection
 In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with CSound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
 
+### Problems
 There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them runnable in a browser.
 
+### Further Improvements
 There are several further improvements that can be made. Some of these are fixing audio glitches, better parameter mapping, improve planetary orbits (direction, shape, moving planets between orbits, collision), additional instruments and processing, and better mouse controls. Even though the project has its faults, we are quite happy with the result from these past two weeks.
