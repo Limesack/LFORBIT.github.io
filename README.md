@@ -181,7 +181,7 @@ The processing of the sounds is done using numerous techniques:
     - Different room sizes
 
 ## Parameters
-Each parameter is mapped to several parts of the CSound code, making the parameters quite complex and hard to define through concise wording. However, the purpose behind this is a further improvement to the generative nature of the project, so that the soundscape is constantly changing.
+Several parts of the Csound code are mapped to each planet, making the results of the velocity change to each planet quite complex and hard to define through concise wording. However, the purpose behind this is a further improvement to the generative nature of the project, so that the soundscape is constantly changing. We had a focus from the start to allow the user to make drastic changes to the overall soundscape, but in the final version of our project, while the Csound parameter changes are clearly audible, they will probably not be as noticeable for a lot of users.
 
 
 Not all planets are used for mapping, but the ones that are used, and how they are used, is described as following:
@@ -211,9 +211,9 @@ Not all planets are used for mapping, but the ones that are used, and how they a
 ## Reflection
 In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with Csound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
 
-### Personal reflection Håkon:
+### Personal reflections Håkon:
 My personal experience with this project has been quite good, and I think we have made a good team. From the beginning, I wanted to explore ways to create generative music in CSound. I have tried different ways of randomizing parameters so that instruments have improved variation, while still somewhat maintaining its original timbre. I feel like I have accomplished this well, and I know this knowledge will be useful in future projects. A part of the project that I feel was confusing and difficult was the development of the webpage itself. While there were some useful coding examples, jumping into new programming languages was confusing and difficult for me. Overall, I think the project turned out great. I think the concept we made is unique, the soundscape is interesting, and controlling the planets function in the user-friendly way that we wanted to achieve.
-for creating a  in the sense that the instrument still maintains the timbre, and feel like I can use this knowledge in future projects.
+
 
 ### Problems
 There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them runnable in a browser.
