@@ -153,12 +153,13 @@ Figure 3: Example of planet value scaled for use in CSound Instrument
 
 
 ## Synthesis & Processing
-All the sounds are generated using noise ([pinker](https://csound.com/docs/manual/pinker.html), [dust2](https://csound.com/docs/manual/dust2.html)), granular synthesis ([partikkel](https://csound.com/docs/manual/partikkel.html)), subtractive synthesis ([oscili](https://csound.com/docs/manual/oscili.html)), and Karplus-Strong synthesis ([pluck](https://csound.com/docs/manual/pluck.html)) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other.
+All the sounds are generated using noise ([pinker](https://csound.com/docs/manual/pinker.html), [dust2](https://csound.com/docs/manual/dust2.html)), granular synthesis ([partikkel](https://csound.com/docs/manual/partikkel.html)), subtractive synthesis ([oscili](https://csound.com/docs/manual/oscili.html)), and Karplus-Strong synthesis ([pluck](https://csound.com/docs/manual/pluck.html)) in Csound. Our focus when programming was to create sounds for individual frequency zones to reduce masking, and to make each layer stand out from each other both in frequency and in timbre.
 
 
 The sounds created from noise is a low frequent rumbling that creates a certain ambience in the soundscape. The granular synthesis is a short repeating sine tone that varies in pitch, amplitude, and length between each tone. The subtractive synthesis is a slowly decaying bass sawtooth tone that constantly changes pitch. The Karplus-Strong synthesis consists of two instruments, one replicating a guitar string, and the other a drum, where both have a certain degree of randomness that decides their amplitude, panning and pitch.
 
 
+### Granular Synthesis
 
 The processing of the sounds is done using numerous techniques:
 -	Granular manipulation
@@ -208,7 +209,11 @@ Not all planets are used for mapping, but the ones that are used, and how they a
     -	Planet 8 x-coordinates modulates the amplitude of the dry signal sent into the reverb
 
 ## Reflection
-In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with CSound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
+In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with Csound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
+
+### Personal reflection Håkon:
+My personal experience with this project has been quite good, and I think we have made a good team. From the beginning, I wanted to explore ways to create generative music in CSound. I have tried different ways of randomizing parameters so that instruments have improved variation, while still somewhat maintaining its original timbre. I feel like I have accomplished this well, and I know this knowledge will be useful in future projects. A part of the project that I feel was confusing and difficult was the development of the webpage itself. While there were some useful coding examples, jumping into new programming languages was confusing and difficult for me. Overall, I think the project turned out great. I think the concept we made is unique, the soundscape is interesting, and controlling the planets function in the user-friendly way that we wanted to achieve.
+for creating a  in the sense that the instrument still maintains the timbre, and feel like I can use this knowledge in future projects.
 
 ### Problems
 There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them runnable in a browser.
