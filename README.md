@@ -18,7 +18,9 @@ By combining JavaScript, HTML and WebAudio Csound we have created an interactive
 The system functions by passing x and y coordinates of the planets from JavaScript into Csound and using them as k-rate variables there. This is done by passing data through channels from JavaScript into Csound and defining them as variables. The raw output from the coordinates themselves are not necessarily that useful for use in Csound opcodes, so we have normalized the data into reasonable values for the instruments to function correctly. 
 
 
-(/assets/images/Code_Example.png)
+
+``kPlanet_6_X chnget "Planet_6_X"
+  kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)``
 Figure 2: Example of normalization of “kPlanet_6”
 
 
