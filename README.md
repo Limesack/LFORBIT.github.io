@@ -9,7 +9,7 @@ Sebastians role was granular and spectral processing, while Håkon did the rest 
 ## GUI
 We decided to use a premade JavaScript project as our [graphical interface](https://medium.com/swlh/html-5-canvas-solar-system-e1e18204b123). It consists of 9 orbiting planets that vary in color, with one static planet in the middle. The reason behind using a premade graphical interface was so we could keep our main focus on the audio programming part of the project. The interface is minimalistic in the sense that each planet does not contain any parameter explanations, which encourages the user to explore for the sake of fun and curiosity. 
 
-![GUi](/assets/images/Orbit.png)
+![GUi](/assets/images/Orbit.gif)
 Figure 1: Graphical User Interface of LFOrbit
 
 ## System
@@ -19,8 +19,11 @@ The system functions by passing x and y coordinates of the planets from JavaScri
 
 
 
-  `kPlanet_6_X chnget "Planet_6_X"
-  kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)`
+```csound
+kPlanet_6_X chnget "Planet_6_X"
+kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)
+```
+
 Figure 2: Example of normalization of “kPlanet_6”
 
 
