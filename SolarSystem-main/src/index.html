@@ -8,7 +8,7 @@
         margin: 0;
       }
     </style>
-    <style type="text/css">/*
+    <style type="text/css">/*    Removing large graphics for HTML GUI (play button and console)
       html,
       body {
         font-family: Monospace;
@@ -163,7 +163,10 @@
     nchnls = 2
     0dbfs = 1
 
-    // STARTING THE DIFFERNT INSRUMENTS FOR SYNTHESIS AND PROCESSING // Using schedule instead of the normal score section in CSOUND
+
+    // Using schedule instead of the normal score section in CSOUND
+    // Defines a instrument number, start time and -1 as the lenght; making the instrument hold a indefine note
+    // STARTING THE DIFFERNT INSRUMENTS FOR SYNTHESIS AND PROCESSING
     // Granular Instrument
         schedule 1, 0, -1
 
@@ -409,7 +412,7 @@
             aGrain_Out_L chnget "Grain_Out_L"
             aGrain_Out_R chnget "Grain_Out_R"
 
-        // FEEDBACK FROM PITCH SCALING
+        // FEEDBACK FROM PITCH SCALING ADDED TO DRY SIGNAL
             kskal = 0.75 // FEEDBACK SCALING
             aGrain_Out_L += aGrainPitchedL*kskal
             aGrain_Out_R += aGrainPitchedR*kskal
@@ -520,8 +523,9 @@
             kFrequency = p6 // in Hz
             ktrigger = p7
 
-            kEnv madsr .01,0.5,0.3,0.1// i(gkPlanet_3), .2, 0.1
-            aOut pluck kAmplitude, randomh:k(2,10,10), 220, 0, 1, .1, 10
+        //Karplus-Strong opcode for randomized drum sound
+            kEnv madsr .01,0.5,0.3,0.1 //Envelope
+            aOut pluck kAmplitude, randomh:k(2,10,10), 220, 0, 1, .1, 10 //
 
         //Random Pan
             ktrigon trigger ktrigger, 0.5, 0
@@ -530,7 +534,7 @@
         // output and panning
             aOut  *=     sqrt((1 - kPan))*kEnv
             aOut  *=     sqrt(kPan)*kEnv
-
+        //audio out
             chnset aOut, "SynthL"
             chnset aOut, "SynthR"
       endin
@@ -543,12 +547,16 @@
             kPlanet_3_X chnget "Planet_3_X"
             kPlanet_3_XNORM = (kPlanet_3_X-713)/(957+713) // Normalised for use in range 0-1
 
+        //Filters L+R
             afiltL moogvcf aL, 1500 , 0.3
             afiltR moogvcf aR, 1500 , 0.3
+
+        //Reverb
             arevl, arevr reverbsc afiltL, afiltR, kPlanet_3_XNORM+0.8, 8000
+        //Mix dry + wet
             aoutL = afiltL + arevl
             aoutR = afiltR + arevr
-
+        //Audio out
             chnset aoutL, "Pulse_Out_L"
             chnset aoutR, "Pulse_Out_R"
       endin
@@ -561,12 +569,11 @@
             kmetroRandom random 0.07, 0.14
             ktrigger metro kmetroRandom
 
-            kmintim = 0 // minimum time between generated events, in seconds. If kmintim <= 0, no time limit exists. If the kinsnum is negative (to turn off an instrument), this test is bypassed.
-            kmaxnum = 2 // maximum number of simultaneous instances of instrument kinsnum allowed. If the number of existant instances of kinsnum is >= kmaxnum, no new event is generated. If kmaxnum is <= 0, it is not used to limit event generation. If the kinsnum is negative (to turn off an instrument), this test is bypassed.2 = kinsnum = 2// instrument number. Equivalent to p1 in a score i statement.
+            kmintim = 0 // minimum time between generated events, in seconds.
+            kmaxnum = 2 // maximum number of simultaneous instances of instrument kinsnum allowed.
             kinsnum = 42 //instrument number
-            kwhen = 0 // start time of the new event. Equivalent to p2 in a score i statement. Measured from the time of the triggering event. kwhen must be >= 0. If kwhen > 0, the instrument will not be initialized until the actual time when it should start performing.
-            kDuration = 0.25 // STEP LENGHT FRA HTLM // duration of event. Equivalent to p3 in a score i statement. If kDuration = 0, the instrument will only do an initialization pass, with no performance. If kdur is negative, a held note is initiated. (See ihold and i statement.)
-            //ip4, ip5, ...// Equivalent to p4, p5, etc., in a score i statement
+            kwhen = 0 // start time of the new event.
+            kDuration = 0.25 // duration of event.
 
         // Frequency-array
             kArray[] fillarray 783.99, 1174.66, 1318.51, 1567.98
@@ -585,6 +592,7 @@
         kFrequency = p6 // in Hz
         ktrigger = p7
 
+        //Karplus-Strong opcode for plucked string sound
         kEnv madsr 0.1, .1, .2, .1
         aOut pluck kAmplitude, kFrequency, 50, 0, 1, .5, 10
 
@@ -595,25 +603,30 @@
             aSigL  =     aOut * sqrt((1 - kPan))
             aSigR  =     aOut * sqrt(kPan)
 
+        //Adds envelope
             aSigL = aSigL * kEnv
             aSigR = aSigR * kEnv
 
+        //Audio out
             chnset aSigL, "Guitar_L"
             chnset aSigR, "Guitar_R"
 
       endin
     instr 43
-
+        //Audio in
             aSigL chnget "Guitar_L"
             aSigR chnget "Guitar_R"
 
-            afiltL moogvcf aSigL, 1500 /**gkPlanet_3*/, 0.5
-            afiltR moogvcf aSigR, 1500 /**gkPlanet_3*/, 0.5
-            arevl, arevr reverbsc afiltL, afiltR, 0.94/*0.98*gkPlanet_4*/, 8000
-
+        //Filters L+R
+            afiltL moogvcf aSigL, 1500, 0.5
+            afiltR moogvcf aSigR, 1500, 0.5
+        //Reverb
+            arevl, arevr reverbsc afiltL, afiltR, 0.94, 8000
+        //Mix dry+wet
             aoutL = afiltL + arevl
             aoutR = afiltR + arevr
 
+        //Audio out
             chnset aoutL, "GIT_L"
             chnset aoutR, "GIT_R"
 
@@ -623,18 +636,16 @@
     instr 51
         //SYNTH CONTROLLER
 
-        // hente kDuration fra HTLM
+        //Randomized trigger
             kmetro random 0.03, 0.08
             ktrigger metro kmetro
 
-            ktrigger = ktrigger // triggers a new score event. If ktrigger = 0, no new event is triggered.
-            kmintim = 0 // minimum time between generated events, in seconds. If kmintim <= 0, no time limit exists. If the kinsnum is negative (to turn off an instrument), this test is bypassed.
-            kmaxnum = 2 // maximum number of simultaneous instances of instrument kinsnum allowed. If the number of existant instances of kinsnum is >= kmaxnum, no new event is generated. If kmaxnum is <= 0, it is not used to limit event generation. If the kinsnum is negative (to turn off an instrument), this test is bypassed.2 = kinsnum = 2// instrument number. Equivalent to p1 in a score i statement.
+            ktrigger = ktrigger // triggers a new score event.
+            kmintim = 0 // minimum time between generated events, in seconds.
+            kmaxnum = 2 // maximum number of simultaneous instances of instrument kinsnum allowed.
             kinsnum = 52 //instrument number
-            kwhen = 0 // start time of the new event. Equivalent to p2 in a score i statement. Measured from the time of the triggering event. kwhen must be >= 0. If kwhen > 0, the instrument will not be initialized until the actual time when it should start performing.
-            kDuration = 10
-            // STEP LENGHT FRA HTLM // duration of event. Equivalent to p3 in a score i statement. If kDuration = 0, the instrument will only do an initialization pass, with no performance. If kdur is negative, a held note is initiated. (See ihold and i statement.)
-            //ip4, ip5, ...// Equivalent to p4, p5, etc., in a score i statement
+            kwhen = 0 // start time of the new event.
+            kDuration = 10 // duration of event.
 
             //                                                                p4
             schedkwhen ktrigger, kmintim, kmaxnum, kinsnum, kwhen, kDuration, kDuration
@@ -678,9 +689,9 @@
 
         // FILTER *** HENTE FRA HTLM
             kcf = 120 // filter cutoff frequency
-            kres = 0.5 // resonance, generally < 1, but not limited to it. Higher than 1 resonance values might cause aliasing, analogue synths generally allow resonances to be above 1.
+            kres = 0.5 // resonance, generally < 1, but not limited to it.
 
-            aOut moogladder2 aOut, kcf, kres// * gkPlanet_3, kres
+            aOut moogladder2 aOut, kcf, kres
 
         // Envelope
             iatt = p4*0.1 //0.05// duration of attack phase
@@ -697,19 +708,19 @@
     // Noise
     instr 61
 
-            kdensity random 100, 200
-            kcf_1 = 150
-            kcf_2 = 100
+            kdensity random 100, 200 //Density between each noise grain
+            kcf_1 = 150 //Filter cutoff
+            kcf_2 = 100 //Filter cutoff
 
-            aNoise_1 pinker
-            aNoise_1_Filt moogvcf aNoise_1, kcf_1, 0.5
+            aNoise_1 pinker //Generates noise
+            aNoise_1_Filt moogvcf aNoise_1, kcf_1, 0.5 //Filter
 
-            aNoise_2  dust2 0.5, kdensity
-            aNoise_2_Filt tone aNoise_2, kcf_2
+            aNoise_2  dust2 0.5, kdensity //Generates noise by creating a series of impulses depending on kdensity (100-200 per second)
+            aNoise_2_Filt tone aNoise_2, kcf_2 //Filter
 
-            asum = aNoise_1_Filt + aNoise_2_Filt
+            asum = aNoise_1_Filt + aNoise_2_Filt //Mix L+R
 
-            chnset asum, "LF_noise"
+            chnset asum, "LF_noise" //Audio out
 
         // high frequency Noise
             // Creates pink noise
@@ -768,6 +779,7 @@
             aHFnoiseR chnget "HFnoiseR"
 
         // MAIN OUTPUT
+        // Summing all the individual channels (gained in their respective instruments) and scales the total value 
             kGlobal_Out_skal = 0.5
             outs (aPulse_Out_L+aGIT_L+aBass+aGrain_Out_L+aLFnoise+aHFnoiseL+aSpectral_Out_L)*kGlobal_Out_skal,\
                  (aPulse_Out_R+aGIT_R+aBass+aGrain_Out_R+aLFnoise+aHFnoiseR+aSpectral_Out_R)*kGlobal_Out_skal
@@ -788,13 +800,11 @@
 
        stars.forEach(star => {
          star.draw();
-         //do something with sound
+         // Code can be increased here to animate, or interact with the stars in the system
        });
 
        planets.forEach(planet => {
          planet.update();
-         //console.log(planets[1].x)
-         //PLANET[0] = SUN, NO MOVEMENT
          // Importing planet parametres from Canvas and sends them to CSound instance
          csound.setControlChannel("Planet_0_X", planets[0].x);
          csound.setControlChannel("Planet_0_Y", planets[0].y);
@@ -823,8 +833,6 @@
          csound.setControlChannel("Planet_8_X", planets[8].x);
          csound.setControlChannel("Planet_8_Y", planets[8].y);
          csound.setControlChannel("Planet_8_Radian", planets[8].radian);
-         //do something with sound
-         //here you can get planet.x , planet.y etc
        });
      }
      planetToDrag = null
@@ -839,7 +847,6 @@
      		   return [x,y]
 
      		}
-          	//const canvas = document.querySelector('canvas')
      		canvas.addEventListener('mousedown', function(e) {
      		    dragStart = getCursorPosition(canvas, e)
      		    dragging = true;
@@ -861,13 +868,7 @@
      			if (dragging){
      				dragEnd = getCursorPosition(canvas, e)
      				dist = (dragEnd[0]-dragStart[0])/10000
-     				//console.log(dist)
-             //console.log(planetToDrag)
              planetToDrag.velocity = Math.max(planetToDrag.velocity + dist, 0.0001)
-     				//planets.forEach(planet => {
-     				//	planet.velocity = Math.max(planet.velocity + dist, 0.0001)
-             //  console.log(planet.velocity)
-     				//})
              dragStart = dragEnd;
      			}
      		})
