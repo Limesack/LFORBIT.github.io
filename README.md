@@ -19,7 +19,7 @@ The system functions by passing x and y coordinates of the planets from JavaScri
 
 
 
-``kPlanet_6_X chnget "Planet_6_X"
+  ``kPlanet_6_X chnget "Planet_6_X"
   kPlanet_6_XNORM = (kPlanet_6_X-563)/(1112+563)``
 Figure 2: Example of normalization of “kPlanet_6”
 
