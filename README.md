@@ -264,12 +264,17 @@ My goals for the project were to further explore the use of granular synthesis a
 The spectral processing instruments function is to provide expanded texture in conjunction with the granular instrument. It contains a few separate processes (i.e. spectral freezing, scaling, freezing, morphing and blurring), and the scaling and morphing is especially prominent in the final product; while the freezing serves as an additional controllable texture. The Scaling function creates a shimmer delay effect by feeding the pitched signal into the input of the spectral processing instrument, and by controlling this parameter with data from the planets it manifests nicely in the final result.
 
 
+
+
 The spectral morphing interpolates both the frequency content and the amplitude of two different source signals (here the output from the granular synthesiser and the output from the pulse instrument). This serves as a faux reverb for the granular synthesis, and it gives the reverberation from the pulse instrument the spectral content from the tonal granular synthesis. Both the granular instrument and the spectral processing provide a huge range of parameters that can be controlled by our LFO system, something I wish we could have expanded further; and explored several sets of mappings. Given our lack of experience with JavaScript and HTML, it proved more challenging than anticipated to create the environment from where we could collect our control signals and implementing our CSound code was also more problematic than excepted.  
+
 
 
 
 ## Problems
 There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them run by pure synthesis in a browser. Also given the change in control method, from a slider based system to a completely different system meant that we had to spend time implement the control system halfway through the project. Our lack of experience with JavaScript And HTML certainly didn't help with this.
+
+
 
 
 The only remaining problem in the project is noisy artefacts that appear when running the code in HTLM. Having tried to eliminate this in several ways, we believe that it is caused by overloading the CSound module with input data from the animation function. Possible solutions include only updating the CSound channels by a set frequency, but this will have to be explored at a later date. As the project stands now, it will function when the planets move with low velocity.
