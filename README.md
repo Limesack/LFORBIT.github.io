@@ -185,7 +185,6 @@ The sounds created from noise is a low frequent rumbling that creates a certain 
 
 
 
-### Granular Synthesis
 The processing of the sounds is done using numerous techniques:
 -	Granular manipulation
     - Grain length
@@ -246,7 +245,7 @@ Not all planets are used for mapping, but the ones that are used, and how they a
 
 
 ## Reflection
-In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with Csound, we have further explored granular synthesis and spectral processing, and we have explored inventive ways of mapping LFOs to parameters.
+In this project we have explored new audio programming techniques through creating an interactive web page. We have learned how one can use HTML and JavaScript in combination with CSound, we have further explored granular synthesis and spectral processing alongside inventive ways of mapping LFOs to parameters.
 
 
 
@@ -257,20 +256,29 @@ My personal experience with this project has been quite good, and I think we hav
 
 
 
-### Personal reclections Sebastian:
-afnsjnjsankjsafknjafsknjfsaknjnjkafskjnsakjfbksakbfsakbjasfkbj
+### Personal reflections Sebastian:
+My goals for the project were to further explore the use of granular synthesis as a source for spectral manipulation. While not as transformative as I would have liked, I am satisfied with the sound of the granular instrument in itself and while the control parameters for the planets could affect the instrument in a much more drastic way; it fulfils its purpose in the system as a whole.
 
+
+
+The spectral processing instruments function is to provide expanded texture in conjunction with the granular instrument. It contains a few separate processes (i.e. spectral freezing, scaling, freezing, morphing and blurring), and the scaling and morphing is especially prominent in the final product; while the freezing serves as an additional controllable texture. The Scaling function creates a shimmer delay effect by feeding the pitched signal into the input of the spectral processing instrument, and by controlling this parameter with data from the planets it manifests nicely in the final result.
+
+
+The spectral morphing interpolates both the frequency content and the amplitude of two different source signals (here the output from the granular synthesiser and the output from the pulse instrument). This serves as a faux reverb for the granular synthesis, and it gives the reverberation from the pulse instrument the spectral content from the tonal granular synthesis. Both the granular instrument and the spectral processing provide a huge range of parameters that can be controlled by our LFO system, something I wish we could have expanded further; and explored several sets of mappings. Given our lack of experience with JavaScript and HTML, it proved more challenging than anticipated to create the environment from where we could collect our control signals and implementing our CSound code was also more problematic than excepted.  
 
 
 
 ## Problems
-There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them runnable in a browser.
+There were some troubles using WebAudio CSound, particularly with opening audio files, but we adopted to the situation and made the necessary adjustments to our instruments to make them run by pure synthesis in a browser. Also given the change in control method, from a slider based system to a completely different system meant that we had to spend time implement the control system halfway through the project. Our lack of experience with JavaScript And HTML certainly didn't help with this.
+
+
+The only remaining problem in the project is noisy artefacts that appear when running the code in HTLM. Having tried to eliminate this in several ways, we believe that it is caused by overloading the CSound module with input data from the animation function. Possible solutions include only updating the CSound channels by a set frequency, but this will have to be explored at a later date. As the project stands now, it will function when the planets move with low velocity.
 
 
 
 
 ## Further Improvements
-There are several further improvements that can be made. Some of these are fixing audio glitches, better parameter mapping, improve planetary orbits (direction, shape, moving planets between orbits, collision), additional instruments and processing, and better mouse controls. Even though the project has its faults, we are quite happy with the result from these past two weeks.
+There are several further improvements that can be made. Some of these are fixing audio glitches mentioned above, improving the voice of parameters for mapping. We also wanted to include more functionally for the planets (i.e. changing direction of orbit, change orbit shape, moving planets between orbits and collision between planets). We can only imagine how these changes would change the final sonic output of the system. We would also like to include additional instruments and processing, and we would like to improve the mouse controls. Even though the project has its faults, we are quite happy with the result from these past two weeks.
 
 
 
